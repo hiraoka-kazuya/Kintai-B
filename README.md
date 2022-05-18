@@ -22,3 +22,5 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+*ブランチのデフォルトを、「master」から「main」に変更
