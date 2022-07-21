@@ -47,7 +47,7 @@
               <%= link_to "出社", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
             <% end %>
           </td>
-          <td></td>
+          <td><%= l(day.started_at, format: :time) if day.started_at.present? %></td>
           <td></td>
           <td></td>
           <td></td>
