@@ -23,6 +23,10 @@
   </table>
 </div>
 
+<div class="btn-users-show">
+  <%= link_to "勤怠編集ページへ", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-success" %>
+</div>
+
 <div>
   <table class="table table-bordered table-condensed table-hover" id="table-attendances">
     <thead>
