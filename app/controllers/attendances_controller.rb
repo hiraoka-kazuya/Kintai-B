@@ -30,10 +30,16 @@ class AttendancesController < ApplicationController
   end
   
   def update_one_month
+    @attendances = @user.attendances.where(worked_on: @first_day..@last_day).order(:worked_on)
     ActiveRecord::Base.transaction do
       attendances_params.each do |id, item|
-        attendance = Attendance.find(id)
-        attendance.update_attributes!(item)
+        if item[:started_at].present? && item[:finished_at].blank?
+          flash[:danger] = "無効な入力データがあった為、更新をキャンセルしました。"
+          redirect_to attendances_edit_one_month_user_url(date: params[:date]) and return
+        else
+          attendance = Attendance.find(id)
+          attendance.update_attributes!(item)
+        end
       end
     end
     flash[:success] = "１ヶ月分の勤怠情報を更新しました。"

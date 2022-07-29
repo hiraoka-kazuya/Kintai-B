@@ -22,12 +22,18 @@ class ApplicationController < ActionController::Base
   
   # アクセスしたユーザーが現在ログインしているユーザーか確認します。
   def correct_user
-    redirect_to(root_url) unless current_user?(@user)
+    unless current_user?(@user)
+      flash[:danger] = "編集権限がありません。"
+      redirect_to(root_url)
+    end
   end
   
   # システム管理権限所有かどうか判定します。
   def admin_user
-    redirect_to root_url unless current_user.admin?
+    unless current_user.admin?
+      flash[:danger] = "編集権限がありません。"
+      redirect_to root_url 
+    end
   end
 
   
